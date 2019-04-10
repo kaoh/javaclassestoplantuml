@@ -23,19 +23,29 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * Doc.
+ * Converter for generating a PlantUML format from java classes.
  *
- * @author <a href="mailto:karsten@simless.com">Karsten Ohme
- * (karsten@simless.com)</a>
+ * @author Karsten Ohme
  */
 public class Converter {
 
+    /**
+     * The package name to scan.
+     */
     private String packageName;
 
+    /**
+     * Constructor.
+     * @param packageName The package name to scan.
+     */
     public Converter(String packageName) {
         this.packageName = packageName;
     }
 
+    /**
+     * Scans and converts the classes to PlnatUML.
+     * @return The PlantUML definition as string.
+     */
     public String convert() {
 
         List<ClassLoader> classLoadersList = new LinkedList<ClassLoader>();
