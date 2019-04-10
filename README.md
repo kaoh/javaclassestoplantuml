@@ -21,3 +21,27 @@ This is the first version and has the following limitations:
         FileUtils.writeStringToFile(new File(dbModel.pu"), dbModel, StandardCharsets.UTF_8);
 
 ```
+
+# Deployment + Release
+
+See https://central.sonatype.org/pages/apache-maven.html
+
+
+# For Snapshots
+
+    mvn clean deploy
+
+## For Releases
+
+```
+mvn release:clean release:prepare
+mvn release:perform
+```
+
+Release the deployment using Nexus See https://central.sonatype.org/pages/releasing-the-deployment.html
+Or alternatively do it with Maven:
+
+```
+cd target/checkout
+mvn nexus-staging:release
+```
