@@ -22,6 +22,14 @@ This is the first version and has the following limitations:
 
 ```
 
+## Maven Dependency
+
+```
+    <groupId>de.ohmesoftware</groupId>
+    <artifactId>classestoplantuml</artifactId>
+    <version>0.0.2</version>
+```
+
 # Deployment + Release
 
 See https://central.sonatype.org/pages/apache-maven.html
