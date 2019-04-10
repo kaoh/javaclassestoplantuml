@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>de.ohmesoftware</groupId>
     <artifactId>classestoplantuml</artifactId>
-    <version>0.0.2-SNAPSHOT</version>
+    <version>0.0.2</version>
     <name>Classes to PlantUML Converter</name>
 
     <description>This library generates PlantUML class diagrams from Java classes.</description>
@@ -153,7 +153,7 @@
         <connection>scm:git:git://github.com/kaoh/javaclassestoplantuml.git</connection>
         <developerConnection>scm:git:ssh://github.com/kaoh/javaclassestoplantuml.git</developerConnection>
         <url>https://github.com/kaoh/javaclassestoplantuml/tree/master</url>
-    <tag>HEAD</tag>
+    <tag>classestoplantuml-0.0.2</tag>
   </scm>
 
 </project>
