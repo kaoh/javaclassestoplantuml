@@ -22,12 +22,13 @@ This is the first version and has the following limitations:
 
 ```
 
+Take note that classes are ending with `.class` when giving includes and excludes.
 ## Maven Dependency
 
 ```
     <groupId>de.ohmesoftware</groupId>
     <artifactId>classestoplantuml</artifactId>
-    <version>0.0.2</version>
+    <version>0.0.3-SNAPSHOT</version>
 ```
 
 # Deployment + Release
