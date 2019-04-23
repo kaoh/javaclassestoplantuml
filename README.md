@@ -17,7 +17,7 @@ This is the first version and has the following limitations:
 # Usage
 
 ```
-        String dbModel = new Converter("mypackage.foo.bar").convert();
+        String dbModel = new Converter("mypackage.foo.bar", Arrays.asList("myIncludeRegEx"), Arrays.asList("myExcludeRegEx")).convert();
         FileUtils.writeStringToFile(new File(dbModel.pu"), dbModel, StandardCharsets.UTF_8);
 
 ```

@@ -34,16 +34,26 @@ public class Converter {
      */
     private String packageName;
 
+    private List<String> excludes;
+
+    private List<String> includes;
+
     /**
      * Constructor.
+     *
      * @param packageName The package name to scan.
+     * @param includes    The includes.
+     * @param excludes    The excludes.
      */
-    public Converter(String packageName) {
+    public Converter(String packageName, List<String> includes, List<String> excludes) {
         this.packageName = packageName;
+        this.excludes = excludes;
+        this.includes = includes;
     }
 
     /**
-     * Scans and converts the classes to PlnatUML.
+     * Scans and converts the classes to PlantUML.
+     *
      * @return The PlantUML definition as string.
      */
     public String convert() {
@@ -52,13 +62,21 @@ public class Converter {
         classLoadersList.add(ClasspathHelper.contextClassLoader());
         classLoadersList.add(ClasspathHelper.staticClassLoader());
 
+        FilterBuilder filterBuilder = new FilterBuilder().includePackage(packageName);
+        if (includes != null && !includes.isEmpty()) {
+            includes.forEach(filterBuilder::include);
+        }
+        if (excludes != null && !excludes.isEmpty()) {
+            excludes.forEach(filterBuilder::exclude);
+        }
+
         Reflections reflections = new Reflections(new ConfigurationBuilder()
                 .setScanners(new SubTypesScanner(false /* don't exclude Object.class */), new ResourcesScanner())
                 .setUrls(ClasspathHelper.forClassLoader(classLoadersList.toArray(new ClassLoader[0])))
-                .filterInputsBy(new FilterBuilder().include(FilterBuilder.prefix(packageName))));
+                .filterInputsBy(filterBuilder));
 
         Set<String> allClasses = reflections.getAllTypes();
-        allClasses.addAll(reflections.getSubTypesOf(Enum.class).stream().map(e -> e.getName()).collect(Collectors.toSet()));
+        allClasses.addAll(reflections.getSubTypesOf(Enum.class).stream().map(Class::getName).collect(Collectors.toSet()));
 
         StringWriter stringWriter = new StringWriter();
         PrintWriter printWriter = new PrintWriter(stringWriter);
@@ -82,8 +100,7 @@ public class Converter {
                 List<String> associations = new ArrayList<>();
                 if (clazz.isEnum()) {
                     Arrays.asList(clazz.getEnumConstants()).forEach(printWriter::println);
-                }
-                else if (!clazz.isInterface()) {
+                } else if (!clazz.isInterface()) {
                     for (Field field : clazz.getDeclaredFields()) {
                         printWriter.print("{field} ");
                         if (Modifier.isPrivate(field.getModifiers())) {
