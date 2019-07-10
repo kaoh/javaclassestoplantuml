@@ -136,10 +136,14 @@ public class Converter {
                         printWriter.println();
                     }
                 }
+                else {
+                    // ignore interfaces
+                    continue;
+                }
                 printWriter.println("}");
                 associations.forEach(printWriter::println);
                 // add inheritance
-                if (allClasses.contains(clazz.getSuperclass().getName())) {
+                if (clazz.getSuperclass() != null && allClasses.contains(clazz.getSuperclass().getName())) {
                     printWriter.println(escapeClassName(clazz.getSuperclass().getName()) + "<|--"
                             + escapeClassName(className));
                 }
