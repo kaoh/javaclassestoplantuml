@@ -136,10 +136,6 @@ public class Converter {
                         printWriter.println();
                     }
                 }
-                else {
-                    // ignore interfaces
-                    continue;
-                }
                 printWriter.println("}");
                 associations.forEach(printWriter::println);
                 // add inheritance
